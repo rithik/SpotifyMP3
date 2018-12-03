@@ -24,11 +24,12 @@ brew install python
 ```
 
 ### 2. Install the youtube-dl library. You can do this by following one of the steps below:
-#### a. If you have a Mac, you can use `brew install youtube-dl`
-#### b. If you have a Linux based machine, `sudo pip install --upgrade youtube_dl`
-#### c. If you have a Windows computer, follow directions at [https://rg3.github.io/youtube-dl/download.html](https://rg3.github.io/youtube-dl/download.html).
+##### a. If you have a Mac, you can use `brew install youtube-dl`
+##### b. If you have a Linux based machine, `sudo pip install --upgrade youtube_dl`
+##### c. If you have a Windows computer, follow directions at [https://rg3.github.io/youtube-dl/download.html](https://rg3.github.io/youtube-dl/download.html).
 
-### 3. Now, install all of the python packages required by running the following command `pip3 install -r requirements.txt`.
+### 3. Now, install all of the required python packages.
+`pip3 install -r requirements.txt`.
 
 ### 4. Get your Spotify playlist URI.
 
