@@ -24,26 +24,26 @@ brew install python
 ```
 
 ### 2. Install the youtube-dl library. You can do this by following one of the steps below:
-a. If you have a Mac, you can use `brew install youtube-dl`
-b. If you have a Linux based machine, `sudo pip install --upgrade youtube_dl`
-c. If you have a Windows computer, follow directions at [https://rg3.github.io/youtube-dl/download.html](https://rg3.github.io/youtube-dl/download.html).
+a. If you have a Mac, you can use `brew install youtube-dl`<br/>
+b. If you have a Linux based machine, `sudo pip install --upgrade youtube_dl`<br/>
+c. If you have a Windows computer, follow directions at [https://rg3.github.io/youtube-dl/download.html](https://rg3.github.io/youtube-dl/download.html).<br/>
 
 ### 3. Now, install all of the required python packages.
 `pip3 install -r requirements.txt`.
 
 ### 4. Get your Spotify API credentials.
 
-a. Navigate to [https://developer.spotify.com/dashboard/login](https://developer.spotify.com/dashboard/login) and create an account.
-b. Click "Create a client id"
-c. Fill out the form.
-d. You should see a client id and a client secret.
+a. Navigate to [https://developer.spotify.com/dashboard/login](https://developer.spotify.com/dashboard/login) and create an account.<br/>
+b. Click "Create a client id".<br/>
+c. Fill out the form.<br/>
+d. You should see a client id and a client secret.<br/>
 
 ### 5. Get your Youtube Data API key.
 
 a. Navigate to [https://console.cloud.google.com](https://console.cloud.google.com) and create an account.
-b. In the search, search for "Youtube Data API".
-c. Enable the API.
-d. You should see an api key.
+b. In the search, search for "Youtube Data API".<br/>
+c. Enable the API.<br/>
+d. You should see an api key.<br/>
 
 ### 6. Run the following command and copy in the appropriate values into the `secret.py` file.
 
