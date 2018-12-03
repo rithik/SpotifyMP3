@@ -26,6 +26,7 @@ def get_youtube_url(search_query, location):
     vid_id = data['items'][0]['id']['videoId']
     vid_title = data['items'][0]['snippet']['title']
     img_url = data['items'][0]['snippet']['thumbnails']['high']['url']
+    print(search_query)
     urllib.request.urlretrieve(img_url, location + "thumbnail.jpg")
     youtube_url = "https://www.youtube.com/watch?v=" + vid_id
     return youtube_url, vid_title
@@ -40,9 +41,7 @@ def download_mp3(url, location, song_name, title):
 
 def set_metadata(song_name, artist, album, location):
     process = subprocess.Popen(['lame', '--tt', song_name, '--ta', artist, '--tl', album, '--ti', 'thumbnail.jpg', song_name + ".mp3"], stdout=subprocess.PIPE, cwd=location)
-    print(['lame', '-tt', song_name, '-ta', artist, '-tl', album, '-ti', 'thumbnail.jpg'])
     output, error = process.communicate()
-    print(output, error)
     os.remove(location + 'thumbnail.jpg')
     os.remove(location + song_name + ".mp3")
     process = subprocess.Popen(['mv', location + song_name + ".mp3.mp3", location + song_name + ".mp3"], stdout=subprocess.PIPE, cwd=location)
@@ -69,7 +68,6 @@ def write_tracks(text_file, tracks, location):
                 url, title = get_youtube_url(search_query, location)
                 download_mp3(url, location, song_name, title)
                 set_metadata(song_name, song_artist, song_album, location)
-                break
             if tracks['next']:
                 tracks = spotify.next(tracks)
             else:
