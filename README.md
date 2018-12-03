@@ -24,16 +24,34 @@ brew install python
 ```
 
 ### 2. Install the youtube-dl library. You can do this by following one of the steps below:
-##### a. If you have a Mac, you can use `brew install youtube-dl`
-##### b. If you have a Linux based machine, `sudo pip install --upgrade youtube_dl`
-##### c. If you have a Windows computer, follow directions at [https://rg3.github.io/youtube-dl/download.html](https://rg3.github.io/youtube-dl/download.html).
+a. If you have a Mac, you can use `brew install youtube-dl`
+b. If you have a Linux based machine, `sudo pip install --upgrade youtube_dl`
+c. If you have a Windows computer, follow directions at [https://rg3.github.io/youtube-dl/download.html](https://rg3.github.io/youtube-dl/download.html).
 
 ### 3. Now, install all of the required python packages.
 `pip3 install -r requirements.txt`.
 
-### 4. Get your Spotify playlist URI.
+### 4. Get your Spotify API credentials.
+
+a. Navigate to [https://developer.spotify.com/dashboard/login](https://developer.spotify.com/dashboard/login) and create an account.
+b. Click "Create a client id"
+c. Fill out the form.
+d. You should see a client id and a client secret.
+
+### 5. Get your Youtube Data API key.
+
+a. Navigate to [https://console.cloud.google.com](https://console.cloud.google.com) and create an account.
+b. In the search, search for "Youtube Data API".
+c. Enable the API.
+d. You should see an api key.
+
+### 6. Run the following command and copy in the appropriate values into the `secret.py` file.
+
+`cp secret.py.example secret.py`
+
+### 7. Get your Spotify playlist URI.
 
 You can do this by going to the Spotify desktop application and right clicking on the top bar near the playlist name. Click on the "Copy Spotify URI" option located in the "Share" menu.
 
-### 5. Run the program by typing the following command with the following required and optional arguments.
+### 8. Run the program by typing the following command with the following required and optional arguments.
 `python3 playlist.py -p SPOTIFY_PLAYLIST_URI -f [OPTIONAL - folder to save the mp3s] -n [OPTIONAL - create new folder to save the mp3s]`

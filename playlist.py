@@ -17,21 +17,35 @@ def generate_token():
     token = credentials.get_access_token()
     return token
 
-def get_youtube_url(search_query):
+def get_youtube_url(search_query, location):
     search_query_fixed = quote(search_query)
     url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + search_query_fixed + "&key=" + secret.YOUTUBE_CLIENT_ID
     data = None
     with urllib.request.urlopen(url) as urllib_url:
         data = json.loads(urllib_url.read().decode())
     vid_id = data['items'][0]['id']['videoId']
+    vid_title = data['items'][0]['snippet']['title']
+    img_url = data['items'][0]['snippet']['thumbnails']['high']['url']
+    urllib.request.urlretrieve(img_url, location + "thumbnail.jpg")
     youtube_url = "https://www.youtube.com/watch?v=" + vid_id
-    print(youtube_url)
-    return youtube_url
+    return youtube_url, vid_title
 
-def download_mp3(url, location):
-
-    bashCommand = 'youtube-dl --extract-audio -o "%(title)s.%(ext)s" --audio-format mp3 --embed-thumbnail ' + url
+def download_mp3(url, location, song_name, title):
+    bashCommand = 'youtube-dl --extract-audio -o downloaded.%(ext)s" --audio-format mp3 ' + url
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE, cwd=location)
+    output, error = process.communicate()
+    bashCommand = 'mv downloaded.mp3 \'' + song_name + '.mp3\''
+    process = subprocess.Popen(['mv', 'downloaded.mp3', '{0}.mp3'.format(song_name)], stdout=subprocess.PIPE, cwd=location)
+    output, error = process.communicate()
+
+def set_metadata(song_name, artist, album, location):
+    process = subprocess.Popen(['lame', '--tt', song_name, '--ta', artist, '--tl', album, '--ti', 'thumbnail.jpg', song_name + ".mp3"], stdout=subprocess.PIPE, cwd=location)
+    print(['lame', '-tt', song_name, '-ta', artist, '-tl', album, '-ti', 'thumbnail.jpg'])
+    output, error = process.communicate()
+    print(output, error)
+    os.remove(location + 'thumbnail.jpg')
+    os.remove(location + song_name + ".mp3")
+    process = subprocess.Popen(['mv', location + song_name + ".mp3.mp3", location + song_name + ".mp3"], stdout=subprocess.PIPE, cwd=location)
     output, error = process.communicate()
 
 def write_tracks(text_file, tracks, location):
@@ -43,11 +57,19 @@ def write_tracks(text_file, tracks, location):
                 else:
                     track = item
                 search_query = track['name']
+                song_name = track['name']
+                song_artist = ""
+                song_album = ""
                 if "artists" in track:
                     search_query = track['name'] + " " + track['artists'][0]['name']
+                    song_artist = track['artists'][0]['name']
+                if "album" in track:
+                    song_album = track['album']['name']
                 file_out.write(search_query + '\n')
-                url = get_youtube_url(search_query)
-                download_mp3(url, location)
+                url, title = get_youtube_url(search_query, location)
+                download_mp3(url, location, song_name, title)
+                set_metadata(song_name, song_artist, song_album, location)
+                break
             if tracks['next']:
                 tracks = spotify.next(tracks)
             else:
