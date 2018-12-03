@@ -29,7 +29,7 @@ b. If you have a Linux based machine, `sudo pip install --upgrade youtube_dl`<br
 c. If you have a Windows computer, follow directions at [https://rg3.github.io/youtube-dl/download.html](https://rg3.github.io/youtube-dl/download.html).<br/>
 
 ### 3. Now, install all of the required python packages.
-`pip3 install -r requirements.txt`.
+`pip3 install -r requirements.txt`
 
 ### 4. Get your Spotify API credentials.
 
