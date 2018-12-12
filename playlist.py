@@ -88,9 +88,10 @@ def split_spotify_uri(uri):
 
 def get_os():
     import platform
-    if platform.system() == "Windows":
+    os_name = platform.system()
+    if os_name == "Windows":
         return "Windows"
-    elif platform.system() == "Darwin":
+    elif os_name == "Darwin":
         return "Mac"
     else:
         return "Linux"
