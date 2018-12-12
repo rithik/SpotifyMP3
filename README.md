@@ -23,6 +23,9 @@ Next, install python with the following command.
 brew install python
 ```
 
+#### Linux:
+Use the following command to install the latest version of python: `sudo apt-get install python3`
+
 ### 2. Install the youtube-dl library. You can do this by following one of the steps below:
 a. If you have a Mac, you can use `brew install youtube-dl`<br/>
 b. If you have a Linux based machine, `sudo pip install --upgrade youtube_dl`<br/>
