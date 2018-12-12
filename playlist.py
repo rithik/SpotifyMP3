@@ -144,7 +144,7 @@ spotify = spotipy.Spotify(auth=token)
 os_type = get_os()
 folder = args['folder']
 playlist_name, text_file, tracks = write_playlist(username, playlist_id)
-folder = get_folder(os, folder, args['new'], playlist_name)
+folder = get_folder(os_type, folder, args['new'], playlist_name)
 write_tracks(text_file, tracks, folder)
 
 os.remove(playlist_name + ".txt")
