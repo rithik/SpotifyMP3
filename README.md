@@ -43,7 +43,7 @@ d. You should see a client id and a client secret.<br/>
 
 ### 5. Get your Youtube Data API key.
 
-a. Navigate to [https://console.cloud.google.com](https://console.cloud.google.com) and create an account.
+a. Navigate to [https://console.cloud.google.com](https://console.cloud.google.com) and create an account.<br/>
 b. In the search, search for "Youtube Data API".<br/>
 c. Enable the API.<br/>
 d. You should see an api key.<br/>
@@ -51,6 +51,8 @@ d. You should see an api key.<br/>
 ### 6. Run the following command and copy in the appropriate values into the `secret.py` file.
 
 `cp secret.py.example secret.py`
+
+Your `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` will be found in the Spotify API Console. The `YOUTUBE_CLIENT_ID` will be the api key found in your Google Cloud Console.
 
 ### 7. Get your Spotify playlist URI.
 
