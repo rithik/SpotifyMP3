@@ -39,6 +39,17 @@ def download_mp3(url, location, song_name, title):
     process = subprocess.Popen(['mv', 'downloaded.mp3', '{0}.mp3'.format(song_name)], stdout=subprocess.PIPE, cwd=location)
     output, error = process.communicate()
 
+def last_fm_artist_info(song_name):
+    song_name_fixed = quote(song_name)
+    url = "http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + song_name_fixed + "&api_key=" + secret.LAST_FM_API_KEY + "&format=json"
+    data = None
+    with urllib.request.urlopen(url) as urllib_url:
+        data = json.loads(urllib_url.read().decode())
+    artist = data["results"]["trackmatches"]["track"][0]["artist"]
+    if len(artist) > 2:
+        return artist
+    return ""
+
 def set_metadata(song_name, artist, album, location):
     process = subprocess.Popen(['lame', '--tt', song_name, '--ta', artist, '--tl', album, '--ti', 'thumbnail.jpg', song_name + ".mp3"], stdout=subprocess.PIPE, cwd=location)
     output, error = process.communicate()
@@ -62,8 +73,11 @@ def write_tracks(text_file, tracks, location):
                 if "artists" in track:
                     search_query = track['name'] + " " + track['artists'][0]['name']
                     song_artist = track['artists'][0]['name']
+                if song_artist == "":
+                    song_artist = last_fm_artist_info(song_name)
                 if "album" in track:
                     song_album = track['album']['name']
+                print(song_artist)
                 file_out.write(search_query + '\n')
                 url, title = get_youtube_url(search_query, location)
                 download_mp3(url, location, song_name, title)
